@@ -19,6 +19,8 @@ I have wrote 4 blogs explaining the concepts behind [Zyrox](https://peterr.dev/b
 -   [Part III: Encrypted Jump Tables](https://peterr.dev/blogs/zyrox/llvm-obfuscator-part-three)
 -   [Part IV: The Finale](https://peterr.dev/blogs/zyrox/llvm-obfuscator-part-four)
 
+These parts go deeper than this readme, and definitely worth a read if you are interested in the topic.
+
 # Contacts
 
 I get this is a complex topic, and this project was mostly for educational purposes, as well as to serve BSD Brawl.
