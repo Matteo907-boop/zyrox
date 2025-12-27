@@ -21,6 +21,59 @@ I have wrote 4 blogs explaining the concepts behind [Zyrox](https://peterr.dev/b
 
 These parts go deeper than this readme, and definitely worth a read if you are interested in the topic.
 
+# Building
+
+First, compile quickjs:
+
+```shell
+git clone https://github.com/bellard/quickjs.git
+cd quickjs
+make libquickjs.a -j4
+```
+
+take `libquickjs.a` and put it in `libs` folder.
+
+install llvm:
+
+```shell
+sudo apt update
+sudo apt install llvm-18 llvm-18-dev clang-18
+```
+
+finally, clone and compile zyrox:
+
+```shell
+git clone https://github.com/PeterHackz/zyrox.git
+cd zyrox
+cmake -S . -B build
+cmake --build build
+```
+
+# Usage
+
+Quick Usage:
+```shell
+clang -O0 -flto=full -c main.c -o out/main.o
+clang -flto=full -fuse-ld=lld -Wl,--load-pass-plugin=./build/libzyrox.so out/main.o -o out/main
+```
+
+Advanced: Integrating with a cmake project:
+```cmake
+set(ZYROX_PLUGIN "<your path here>/libzyrox.so" CACHE FILEPATH "Path to libzyrox.so plugin")
+file(REAL_PATH "${ZYROX_PLUGIN}" ZYROX_PLUGIN_ABS)
+
+target_link_options(your_target PRIVATE
+        "-fuse-ld=/usr/bin/ld.lld"
+        "-Wl,--load-pass-plugin=${ZYROX_PLUGIN_ABS}"
+)
+
+target_compile_options(your_target PRIVATE
+        -flto=full
+)
+```
+
+I'll make a repo soon as a template for using Zyrox in cmake.
+
 # Contacts
 
 I get this is a complex topic, and this project was mostly for educational purposes, as well as to serve BSD Brawl.
@@ -50,34 +103,6 @@ more documentation about this will be provided in the future.
 
 switches create jump tables and PHI nodes are annoying to deal with thus we use `FunctionUtils` and `BasicBlockUtils`
 to flatten (into if statements) and demote these respectively.
-
-# Building
-
-First, compile quickjs:
-
-```shell
-git clone https://github.com/bellard/quickjs.git
-cd quickjs
-make libquickjs.a -j4
-```
-
-take `libquickjs.a` and put it in `libs` folder.
-
-install llvm:
-
-```shell
-sudo apt update
-sudo apt install llvm-18 llvm-18-dev clang-18
-```
-
-finally, clone and compile zyrox:
-
-```shell
-git clone ...
-cd ...
-cmake -S . -B build
-cmake --build build
-```
 
 # Passes
 
