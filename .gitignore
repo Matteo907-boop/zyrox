@@ -1,0 +1,10 @@
+/cmake-build-debug
+/.idea
+/out
+/a.out
+/*.log
+/tests/out
+/.venv
+/tests/*.out
+/build
+zyrox*.txt

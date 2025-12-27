@@ -1,0 +1,2 @@
+CompileFlags:
+  Add: ["-I/lib/llvm-18/include/", "-I/home/peter/Desktop/projects/zyrox/include/", "-std=c++20"]
