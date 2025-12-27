@@ -4,7 +4,7 @@
 
 # Why
 
-why not ¯\\_(ツ)_/¯
+why not ¯\\\_(ツ)\_/¯
 
 One of my biggest projects, where I learned a lot about LLVM internals, binary formats, assembly and obfuscation techniques.
 
