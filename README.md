@@ -24,7 +24,7 @@ These parts go deeper than this readme, and definitely worth a read if you are i
 # Contacts
 
 I get this is a complex topic, and this project was mostly for educational purposes, as well as to serve BSD Brawl.
-If you have any question, or just want to chat, feel free to reach me out:
+If you have any question, or just want to chat, feel free to reach out to me:
 
 -   Discord: `@s.b`
 -   Email: `mail@peterr.dev` or `me@peterr.dev`
