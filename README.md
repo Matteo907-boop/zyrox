@@ -23,6 +23,14 @@ These parts go deeper than this readme, and definitely worth a read if you are i
 
 # Building
 
+## Template (Quick start, recommended)
+
+This is intended for who wants to _quick test_ Zyrox, or learn how to integrate it in a cmake project.
+
+follow the steps in [zyrox template](https://github.com/PeterHackz/zyrox-template) repo.
+
+## From Source
+
 install llvm:
 
 ```shell
@@ -42,12 +50,14 @@ cmake --build build --parallel 4
 # Usage
 
 Quick Usage:
+
 ```shell
 clang -O0 -flto=full -c main.c -o out/main.o
 clang -flto=full -fuse-ld=lld -Wl,--load-pass-plugin=./build/libzyrox.so out/main.o -o out/main
 ```
 
 Advanced: Integrating with a cmake project:
+
 ```cmake
 set(ZYROX_PLUGIN "<your path here>/libzyrox.so" CACHE FILEPATH "Path to libzyrox.so plugin")
 file(REAL_PATH "${ZYROX_PLUGIN}" ZYROX_PLUGIN_ABS)
@@ -61,8 +71,6 @@ target_compile_options(your_target PRIVATE
         -flto=full
 )
 ```
-
-I'll make a repo soon as a template for using Zyrox in cmake.
 
 # Contacts
 
