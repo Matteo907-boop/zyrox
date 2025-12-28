@@ -1,7 +1,7 @@
 #include <core/ZyroxPassOptions.h>
 #include <cstdio>
 #include <fstream>
-#include <llvm-18/llvm/Support/Debug.h>
+#include <llvm/Support/Debug.h>
 #include <optional>
 #include <quickjs/QuickConfig.h>
 #include <quickjs/QuickRt.h>

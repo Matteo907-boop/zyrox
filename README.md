@@ -23,16 +23,6 @@ These parts go deeper than this readme, and definitely worth a read if you are i
 
 # Building
 
-First, compile quickjs:
-
-```shell
-git clone https://github.com/bellard/quickjs.git
-cd quickjs
-make libquickjs.a -j4
-```
-
-take `libquickjs.a` and put it in `libs` folder.
-
 install llvm:
 
 ```shell
@@ -40,13 +30,13 @@ sudo apt update
 sudo apt install llvm-18 llvm-18-dev clang-18
 ```
 
-finally, clone and compile zyrox:
+clone and compile zyrox:
 
 ```shell
-git clone https://github.com/PeterHackz/zyrox.git
+git clone --recurse-submodules https://github.com/PeterHackz/zyrox.git
 cd zyrox
-cmake -S . -B build
-cmake --build build
+cmake -S . -B build -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++
+cmake --build build --parallel
 ```
 
 # Usage

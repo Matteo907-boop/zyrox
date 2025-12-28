@@ -6,5 +6,6 @@
 /tests/out
 /.venv
 /tests/*.out
-/build
+build
 zyrox*.txt
+/deps/*/CMakeLists.txt

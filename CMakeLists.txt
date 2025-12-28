@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(zyrox DESCRIPTION "Zyrox llvm pass")
 
-set(CMAKE_C_COMPILER clang)
-set(CMAKE_CXX_COMPILER clang++)
-
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(LLVM REQUIRED CONFIG)
@@ -33,12 +30,26 @@ add_library(zyrox SHARED
         src/util/CryptoUtils.cpp
         src/util/Random.cpp
 
-        src/Passes/BasicBlockSplitter.cpp
-        src/Passes/MBASub.cpp
-        src/Passes/IndirectBranch.cpp
-        src/Passes/ControlFlowFlattening.cpp
-        src/Passes/SimpleIndirectBranch.cpp
-        src/Passes/StringEncryption.cpp
+        src/passes/BasicBlockSplitter.cpp
+        src/passes/MBASub.cpp
+        src/passes/IndirectBranch.cpp
+        src/passes/ControlFlowFlattening.cpp
+        src/passes/SimpleIndirectBranch.cpp
+        src/passes/StringEncryption.cpp
 )
 
-target_link_libraries(zyrox PRIVATE ${CMAKE_SOURCE_DIR}/libs/libquickjs.a)
+set(QUICKJS_SRC_DIR ${CMAKE_SOURCE_DIR}/deps/quickjs)
+set(QUICKJS_CMAKE_SRC ${CMAKE_SOURCE_DIR}/cmake/quickjs.cmake)
+set(QUICKJS_CMAKE_DST ${QUICKJS_SRC_DIR}/CMakeLists.txt)
+
+if(NOT EXISTS ${QUICKJS_CMAKE_DST})
+    file(COPY ${QUICKJS_CMAKE_SRC}
+         DESTINATION ${QUICKJS_SRC_DIR})
+    file(RENAME
+         ${QUICKJS_SRC_DIR}/quickjs.cmake
+         ${QUICKJS_CMAKE_DST})
+endif()
+
+add_subdirectory(deps/quickjs)
+
+target_link_libraries(zyrox PRIVATE quickjs)

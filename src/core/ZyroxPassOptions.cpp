@@ -1,8 +1,8 @@
-#include <Passes/BasicBlockSplitter.h>
-#include <Passes/ControlFlowFlattening.h>
-#include <Passes/IndirectBranch.h>
-#include <Passes/MBASub.hpp>
-#include <Passes/SimpleIndirectBranch.h>
+#include <passes/BasicBlockSplitter.h>
+#include <passes/ControlFlowFlattening.h>
+#include <passes/IndirectBranch.h>
+#include <passes/MBASub.hpp>
+#include <passes/SimpleIndirectBranch.h>
 #include <core/ZyroxPassOptions.h>
 
 std::vector<ZyroxFunctionPass> zyrox_passes = {

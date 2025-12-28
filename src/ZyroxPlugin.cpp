@@ -1,13 +1,12 @@
-#include "Passes/StringEncryption.h"
-
-#include "llvm/IR/DebugInfo.h"
 #include <ZyroxPlugin.h>
 #include <atomic>
 #include <core/ZyroxCore.h>
+#include <llvm/IR/DebugInfo.h>
 #include <llvm/IR/Function.h>
 #include <llvm/IR/PassManager.h>
 #include <llvm/Passes/PassBuilder.h>
 #include <llvm/Passes/PassPlugin.h>
+#include <passes/StringEncryption.h>
 #include <quickjs/QuickConfig.h>
 #include <quickjs/QuickRt.h>
 #include <utils/CryptoUtils.h>
