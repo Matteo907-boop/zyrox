@@ -3,10 +3,11 @@
 
 #include <core/ZyroxPassOptions.h>
 #include <llvm/IR/Function.h>
+#include <string>
 
 using namespace llvm;
 
-typedef std::vector<std::pair<StringRef, uint64_t>> ZyroxMetaDataKV;
+typedef std::vector<std::pair<std::string, uint64_t>> ZyroxMetaDataKV;
 
 class ZyroxPassOptions
 {
