@@ -49,6 +49,7 @@ if(APPLE)
         Analysis
         TransformUtils
         IRReader
+        Linker
     )
 
     set_target_properties(zyrox PROPERTIES
