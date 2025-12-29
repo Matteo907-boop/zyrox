@@ -12,8 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout source (with submodules)
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Make build script executable
         run: chmod +x docker-build-linux-x86_64.sh
