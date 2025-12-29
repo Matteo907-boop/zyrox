@@ -1,0 +1,28 @@
+name: Build Zyrox [Linux x86_64]
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Make build script executable
+        run: chmod +x docker-build-linux-x86_64.sh
+
+      - name: Run Docker build script
+        run: sudo ./docker-build-linux-x86_64.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libzyrox-linux-x86_64.so
+          path: build/libzyrox.so
