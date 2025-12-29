@@ -1,5 +1,6 @@
 #include <core/ZyroxCore.h>
 #include <core/ZyroxMetaData.h>
+#include <llvm-18/llvm/Support/raw_ostream.h>
 #include <llvm/IR/Function.h>
 #include <llvm/IR/Verifier.h>
 #include <utils/FunctionUtils.h>
@@ -36,7 +37,7 @@ void Zyrox::RunOnFunction(Function &f)
         pass_options.RunPass(f);
         if (verifyFunction(f, &errs()))
         {
-            f.dump();
+            f.print(errs());
             Logger::Error("Function verification failed after running {} on {}",
                           pass_options.GetPass().Name, function_name);
         }
