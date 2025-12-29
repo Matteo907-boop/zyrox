@@ -5,6 +5,7 @@ project(zyrox DESCRIPTION "Zyrox llvm pass")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_package(ZLIB REQUIRED)
 find_package(LLVM 18.1.3 CONFIG REQUIRED)
 
 llvm_map_components_to_libnames(LLVM_LIBS
@@ -51,7 +52,17 @@ target_compile_options(zyrox PRIVATE
 )
 
 if(APPLE)
-    target_compile_options(zyrox PRIVATE -fvisibility=hidden)
+    execute_process(
+        COMMAND xcrun --sdk macosx --show-sdk-path
+        OUTPUT_VARIABLE MACOS_SDK
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+    target_compile_options(zyrox PRIVATE
+        -isysroot ${MACOS_SDK}
+        -fvisibility=hidden
+    )
+
     set_target_properties(zyrox PROPERTIES
         MACOSX_RPATH ON
         INSTALL_NAME_DIR "@rpath"
