@@ -36,7 +36,10 @@ add_library(zyrox SHARED
 target_include_directories(zyrox PRIVATE
     ${LLVM_INCLUDE_DIRS}
     include
-    -iquote deps/quickjs
+)
+
+target_compile_options(zyrox PRIVATE
+    -iquote ${CMAKE_CURRENT_LIST_DIR}/deps/quickjs
 )
 
 if(APPLE)
