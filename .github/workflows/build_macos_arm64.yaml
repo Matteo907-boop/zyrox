@@ -1,0 +1,39 @@
+name: Build Zyrox [macOS arm64]
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout source (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          brew update
+          brew install llvm@18 cmake ninja
+
+      - name: Configure
+        run: |
+          cmake -S . -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=$(brew --prefix llvm@18)/bin/clang \
+            -DCMAKE_CXX_COMPILER=$(brew --prefix llvm@18)/bin/clang++
+
+      - name: Build
+        run: cmake --build build -j$(sysctl -n hw.ncpu)
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libzyrox-macos-arm64.dylib
+          path: build/libzyrox.dylib
