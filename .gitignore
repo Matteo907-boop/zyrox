@@ -9,3 +9,5 @@
 build
 zyrox*.txt
 /deps/quickjs/CMakeLists.txt
+.cache
+venv

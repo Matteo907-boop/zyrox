@@ -120,7 +120,6 @@ Value *OpaqueTransformer::Transform(Module &m, IRBuilderBase &builder,
                                     int use_global_variables_chance)
 {
     Value *current = input;
-    std::string base_name = "obf";
 
     IntegerType *target_type =
         m_isArm32 ? builder.getInt32Ty() : builder.getInt64Ty();

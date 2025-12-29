@@ -23,11 +23,11 @@ These parts go deeper than this readme, and definitely worth a read if you are i
 
 # Building
 
-## Template (Quick start, recommended)
+## From Template (Quick Start, Recommended)
 
 This is intended for who wants to _quick test_ Zyrox, or learn how to integrate it in a cmake project.
 
-follow the steps in [zyrox template](https://github.com/PeterHackz/zyrox-template) repo.
+Follow the steps in [Zyrox Template](https://github.com/PeterHackz/zyrox-template) repo.
 
 ## From Source
 
@@ -47,30 +47,49 @@ cmake -S . -B build -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/
 cmake --build build --parallel 4
 ```
 
+## Python (Post-Compile) Plugin setup
+
+make sure you have python3 and pip installed.
+
+### Setup an Environment (Recommended)
+
+```bash
+# Create a virtual environment
+python3 -m venv .venv
+
+# Activate the env
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+### Install Globally
+
+```bash
+pip install -r requirements.txt
+```
+
 # Usage
 
-Quick Usage:
+## Quick Usage
 
 ```shell
 clang -O0 -flto=full -c main.c -o out/main.o
 clang -flto=full -fuse-ld=lld -Wl,--load-pass-plugin=./build/libzyrox.so out/main.o -o out/main
 ```
 
-Advanced: Integrating with a cmake project:
+After obfuscation, run `PyPlugin.py` to encrypt jump tables:
 
-```cmake
-set(ZYROX_PLUGIN "<your path here>/libzyrox.so" CACHE FILEPATH "Path to libzyrox.so plugin")
-file(REAL_PATH "${ZYROX_PLUGIN}" ZYROX_PLUGIN_ABS)
-
-target_link_options(your_target PRIVATE
-        "-fuse-ld=/usr/bin/ld.lld"
-        "-Wl,--load-pass-plugin=${ZYROX_PLUGIN_ABS}"
-)
-
-target_compile_options(your_target PRIVATE
-        -flto=full
-)
+```shell
+# if you installed dependencies in a virtual environment, activate it first:
+source .venv/bin/activate
+#  then run with:
+python PyPlugin.py --in=<input_file> [--out=<output_file>] [--tables=<zyrox_tables_file>] [--android]
 ```
+
+## With CMake
+
+Check out the [Zyrox Template](https://github.com/PeterHackz/zyrox-template) repo for an example CMake integration.
 
 # Contacts
 
@@ -337,8 +356,10 @@ the pass automatically adds `| 1` after decryption.
 
 to use `PyPlugin.py` simply do the following:
 
+(if using venv, activate it first)
+
 ```shell
-python3 PyPlugin.py --in yourfiletoencrypt.so --android
+python3 PyPlugin.py --in <out_obfuscated_file> --android
 ```
 
 passing `--android` is important if you are targeting the arm64 version as the x86_64 version have a different relocator
@@ -408,7 +429,7 @@ example:
 in `index.d.ts` we see:
 
 ```typescript
-type _ = {
+{
     "BasicBlockSplitter.SplitBlockMinSize"?: number;
     "BasicBlockSplitter.SplitBlockMaxSize"?: number;
     "BasicBlockSplitter.SplitBlockChance"?: number;

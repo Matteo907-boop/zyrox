@@ -1,5 +1,10 @@
 Checks: >
-  readability-identifier-naming
+  readability-identifier-naming,
+  clang-analyzer-*,
+  clang-analyzer-core.*,
+  clang-analyzer-cplusplus.*,
+  clang-analyzer-deadcode.*,
+  clang-analyzer-security.*
 
 CheckOptions:
   - { key: readability-identifier-naming.FunctionCase,         value: CamelCase }

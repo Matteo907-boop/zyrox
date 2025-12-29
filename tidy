@@ -1,3 +1,8 @@
-find ./src \( -name '*.cpp' -o -name '*.cc' -o -name '*.h' -o -name '*.hpp' -o -name '*.hh' \) \
-  | grep -v 'quickjs.h' \
-  | xargs -P1 clang-tidy -p cmake-build-debug -header-filter='^(?!.*(quickjs|llvm)/).*$'
+# find ./src \( -name '*.cpp' -o -name '*.cc' -o -name '*.h' -o -name '*.hpp' -o -name '*.hh' \) \
+#   | grep -v 'quickjs.h' \
+#   | xargs -P1 clang-tidy -p build -header-filter='^(?!.*(quickjs|llvm)/).*$'
+run-clang-tidy \
+  -quiet \
+  -p build \
+  src \
+  include
