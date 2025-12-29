@@ -24,10 +24,12 @@ jobs:
 
       - name: Configure
         run: |
+          LLVM_PREFIX=$(brew --prefix llvm@18)
           cmake -S . -B build \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER=$(brew --prefix llvm@18)/bin/clang \
-            -DCMAKE_CXX_COMPILER=$(brew --prefix llvm@18)/bin/clang++
+            -DLLVM_DIR=$LLVM_PREFIX/lib/cmake/llvm \
+            -DCMAKE_C_COMPILER=$LLVM_PREFIX/bin/clang \
+            -DCMAKE_CXX_COMPILER=$LLVM_PREFIX/bin/clang++
 
       - name: Build
         run: cmake --build build -j$(sysctl -n hw.ncpu)
