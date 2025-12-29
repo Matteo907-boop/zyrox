@@ -1,6 +1,6 @@
 #include <core/ZyroxCore.h>
 #include <core/ZyroxMetaData.h>
-#include <llvm-18/llvm/Support/raw_ostream.h>
+#include <llvm/Support/raw_ostream.h>
 #include <llvm/IR/Function.h>
 #include <llvm/IR/Verifier.h>
 #include <utils/FunctionUtils.h>
