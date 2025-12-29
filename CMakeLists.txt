@@ -51,21 +51,6 @@ if(APPLE)
         IRReader
     )
 
-    execute_process(
-        COMMAND xcrun --sdk macosx --show-sdk-path
-        OUTPUT_VARIABLE MACOS_SDK
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-
-    target_compile_options(zyrox PRIVATE
-        -isysroot ${MACOS_SDK}
-        -stdlib=libc++
-    )
-
-    target_link_options(zyrox PRIVATE
-        -stdlib=libc++
-    )
-
     set_target_properties(zyrox PROPERTIES
         MACOSX_RPATH ON
         INSTALL_NAME_DIR "@rpath"
